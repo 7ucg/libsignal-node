@@ -1,6 +1,6 @@
 {
   "name": "libsignal-baron",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Open Whisper Systems' libsignal for Node.js",
   "repository": "7ucg/libsignal-node",
   "main": "index.js",

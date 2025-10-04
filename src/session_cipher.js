@@ -154,7 +154,7 @@ class SessionCipher {
                 errs.push(e);
             }
         }
-        //console.error("Failed to decrypt message with any known session, wait baron will fix it..");
+        console.error("Failed to decrypt message with any known session, wait baron will fix it..");
         // for (const e of errs) {
             // console.error("Session error:" + e, e.stack);
         // }

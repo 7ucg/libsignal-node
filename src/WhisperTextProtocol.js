@@ -9,7 +9,7 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
-$root.textsecure = (function () {
+$root.textsecure = (function() {
 
     /**
      * Namespace textsecure.
@@ -18,7 +18,7 @@ $root.textsecure = (function () {
      */
     var textsecure = {};
 
-    textsecure.WhisperMessage = (function () {
+    textsecure.WhisperMessage = (function() {
 
         /**
          * Properties of a WhisperMessage.
@@ -101,13 +101,13 @@ $root.textsecure = (function () {
         WhisperMessage.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.ephemeralKey != null && message.hasOwnProperty("ephemeralKey"))
+            if (message.ephemeralKey != null && Object.hasOwnProperty.call(message, "ephemeralKey"))
                 writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.ephemeralKey);
-            if (message.counter != null && message.hasOwnProperty("counter"))
+            if (message.counter != null && Object.hasOwnProperty.call(message, "counter"))
                 writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.counter);
-            if (message.previousCounter != null && message.hasOwnProperty("previousCounter"))
+            if (message.previousCounter != null && Object.hasOwnProperty.call(message, "previousCounter"))
                 writer.uint32(/* id 3, wireType 0 =*/24).uint32(message.previousCounter);
-            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.ciphertext);
             return writer;
         };
@@ -136,35 +136,36 @@ $root.textsecure = (function () {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        WhisperMessage.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader)) {
+        WhisperMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            }
-
-            var end = length === undefined ? reader.len : reader.pos + length;
-            var message = new $root.textsecure.WhisperMessage();
-
-            for (; reader.pos < end;) {
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.WhisperMessage();
+            while (reader.pos < end) {
                 var tag = reader.uint32();
+                if (tag === error)
+                    break;
                 switch (tag >>> 3) {
-                    case 1:
+                case 1: {
                         message.ephemeralKey = reader.bytes();
                         break;
-                    case 2:
+                    }
+                case 2: {
                         message.counter = reader.uint32();
                         break;
-                    case 3:
+                    }
+                case 3: {
                         message.previousCounter = reader.uint32();
                         break;
-                    case 4:
+                    }
+                case 4: {
                         message.ciphertext = reader.bytes();
                         break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
-
             return message;
         };
 
@@ -225,7 +226,7 @@ $root.textsecure = (function () {
             if (object.ephemeralKey != null)
                 if (typeof object.ephemeralKey === "string")
                     $util.base64.decode(object.ephemeralKey, message.ephemeralKey = $util.newBuffer($util.base64.length(object.ephemeralKey)), 0);
-                else if (object.ephemeralKey.length)
+                else if (object.ephemeralKey.length >= 0)
                     message.ephemeralKey = object.ephemeralKey;
             if (object.counter != null)
                 message.counter = object.counter >>> 0;
@@ -234,7 +235,7 @@ $root.textsecure = (function () {
             if (object.ciphertext != null)
                 if (typeof object.ciphertext === "string")
                     $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
-                else if (object.ciphertext.length)
+                else if (object.ciphertext.length >= 0)
                     message.ciphertext = object.ciphertext;
             return message;
         };
@@ -292,10 +293,25 @@ $root.textsecure = (function () {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
+        /**
+         * Gets the default type url for WhisperMessage
+         * @function getTypeUrl
+         * @memberof textsecure.WhisperMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        WhisperMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.WhisperMessage";
+        };
+
         return WhisperMessage;
     })();
 
-    textsecure.PreKeyWhisperMessage = (function () {
+    textsecure.PreKeyWhisperMessage = (function() {
 
         /**
          * Properties of a PreKeyWhisperMessage.
@@ -396,17 +412,17 @@ $root.textsecure = (function () {
         PreKeyWhisperMessage.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.preKeyId != null && message.hasOwnProperty("preKeyId"))
+            if (message.preKeyId != null && Object.hasOwnProperty.call(message, "preKeyId"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.preKeyId);
-            if (message.baseKey != null && message.hasOwnProperty("baseKey"))
+            if (message.baseKey != null && Object.hasOwnProperty.call(message, "baseKey"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.baseKey);
-            if (message.identityKey != null && message.hasOwnProperty("identityKey"))
+            if (message.identityKey != null && Object.hasOwnProperty.call(message, "identityKey"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.identityKey);
-            if (message.message != null && message.hasOwnProperty("message"))
+            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.message);
-            if (message.registrationId != null && message.hasOwnProperty("registrationId"))
+            if (message.registrationId != null && Object.hasOwnProperty.call(message, "registrationId"))
                 writer.uint32(/* id 5, wireType 0 =*/40).uint32(message.registrationId);
-            if (message.signedPreKeyId != null && message.hasOwnProperty("signedPreKeyId"))
+            if (message.signedPreKeyId != null && Object.hasOwnProperty.call(message, "signedPreKeyId"))
                 writer.uint32(/* id 6, wireType 0 =*/48).uint32(message.signedPreKeyId);
             return writer;
         };
@@ -435,41 +451,44 @@ $root.textsecure = (function () {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        PreKeyWhisperMessage.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader)) {
+        PreKeyWhisperMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            }
-
-            var end = length === undefined ? reader.len : reader.pos + length;
-            var message = new $root.textsecure.PreKeyWhisperMessage();
-
-            for (; reader.pos < end;) {
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.PreKeyWhisperMessage();
+            while (reader.pos < end) {
                 var tag = reader.uint32();
+                if (tag === error)
+                    break;
                 switch (tag >>> 3) {
-                    case 5:
+                case 5: {
                         message.registrationId = reader.uint32();
                         break;
-                    case 1:
+                    }
+                case 1: {
                         message.preKeyId = reader.uint32();
                         break;
-                    case 6:
+                    }
+                case 6: {
                         message.signedPreKeyId = reader.uint32();
                         break;
-                    case 2:
+                    }
+                case 2: {
                         message.baseKey = reader.bytes();
                         break;
-                    case 3:
+                    }
+                case 3: {
                         message.identityKey = reader.bytes();
                         break;
-                    case 4:
+                    }
+                case 4: {
                         message.message = reader.bytes();
                         break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
-
             return message;
         };
 
@@ -542,17 +561,17 @@ $root.textsecure = (function () {
             if (object.baseKey != null)
                 if (typeof object.baseKey === "string")
                     $util.base64.decode(object.baseKey, message.baseKey = $util.newBuffer($util.base64.length(object.baseKey)), 0);
-                else if (object.baseKey.length)
+                else if (object.baseKey.length >= 0)
                     message.baseKey = object.baseKey;
             if (object.identityKey != null)
                 if (typeof object.identityKey === "string")
                     $util.base64.decode(object.identityKey, message.identityKey = $util.newBuffer($util.base64.length(object.identityKey)), 0);
-                else if (object.identityKey.length)
+                else if (object.identityKey.length >= 0)
                     message.identityKey = object.identityKey;
             if (object.message != null)
                 if (typeof object.message === "string")
                     $util.base64.decode(object.message, message.message = $util.newBuffer($util.base64.length(object.message)), 0);
-                else if (object.message.length)
+                else if (object.message.length >= 0)
                     message.message = object.message;
             return message;
         };
@@ -622,10 +641,25 @@ $root.textsecure = (function () {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
+        /**
+         * Gets the default type url for PreKeyWhisperMessage
+         * @function getTypeUrl
+         * @memberof textsecure.PreKeyWhisperMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        PreKeyWhisperMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.PreKeyWhisperMessage";
+        };
+
         return PreKeyWhisperMessage;
     })();
 
-    textsecure.KeyExchangeMessage = (function () {
+    textsecure.KeyExchangeMessage = (function() {
 
         /**
          * Properties of a KeyExchangeMessage.
@@ -717,15 +751,15 @@ $root.textsecure = (function () {
         KeyExchangeMessage.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.id != null && message.hasOwnProperty("id"))
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
                 writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
-            if (message.baseKey != null && message.hasOwnProperty("baseKey"))
+            if (message.baseKey != null && Object.hasOwnProperty.call(message, "baseKey"))
                 writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.baseKey);
-            if (message.ephemeralKey != null && message.hasOwnProperty("ephemeralKey"))
+            if (message.ephemeralKey != null && Object.hasOwnProperty.call(message, "ephemeralKey"))
                 writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.ephemeralKey);
-            if (message.identityKey != null && message.hasOwnProperty("identityKey"))
+            if (message.identityKey != null && Object.hasOwnProperty.call(message, "identityKey"))
                 writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.identityKey);
-            if (message.baseKeySignature != null && message.hasOwnProperty("baseKeySignature"))
+            if (message.baseKeySignature != null && Object.hasOwnProperty.call(message, "baseKeySignature"))
                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.baseKeySignature);
             return writer;
         };
@@ -754,38 +788,40 @@ $root.textsecure = (function () {
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        KeyExchangeMessage.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader)) {
+        KeyExchangeMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            }
-
-            var end = length === undefined ? reader.len : reader.pos + length;
-            var message = new $root.textsecure.KeyExchangeMessage();
-
-            for (; reader.pos < end;) {
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.KeyExchangeMessage();
+            while (reader.pos < end) {
                 var tag = reader.uint32();
+                if (tag === error)
+                    break;
                 switch (tag >>> 3) {
-                    case 1:
+                case 1: {
                         message.id = reader.uint32();
                         break;
-                    case 2:
+                    }
+                case 2: {
                         message.baseKey = reader.bytes();
                         break;
-                    case 3:
+                    }
+                case 3: {
                         message.ephemeralKey = reader.bytes();
                         break;
-                    case 4:
+                    }
+                case 4: {
                         message.identityKey = reader.bytes();
                         break;
-                    case 5:
+                    }
+                case 5: {
                         message.baseKeySignature = reader.bytes();
                         break;
-                    default:
-                        reader.skipType(tag & 7);
-                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
                 }
             }
-
             return message;
         };
 
@@ -851,22 +887,22 @@ $root.textsecure = (function () {
             if (object.baseKey != null)
                 if (typeof object.baseKey === "string")
                     $util.base64.decode(object.baseKey, message.baseKey = $util.newBuffer($util.base64.length(object.baseKey)), 0);
-                else if (object.baseKey.length)
+                else if (object.baseKey.length >= 0)
                     message.baseKey = object.baseKey;
             if (object.ephemeralKey != null)
                 if (typeof object.ephemeralKey === "string")
                     $util.base64.decode(object.ephemeralKey, message.ephemeralKey = $util.newBuffer($util.base64.length(object.ephemeralKey)), 0);
-                else if (object.ephemeralKey.length)
+                else if (object.ephemeralKey.length >= 0)
                     message.ephemeralKey = object.ephemeralKey;
             if (object.identityKey != null)
                 if (typeof object.identityKey === "string")
                     $util.base64.decode(object.identityKey, message.identityKey = $util.newBuffer($util.base64.length(object.identityKey)), 0);
-                else if (object.identityKey.length)
+                else if (object.identityKey.length >= 0)
                     message.identityKey = object.identityKey;
             if (object.baseKeySignature != null)
                 if (typeof object.baseKeySignature === "string")
                     $util.base64.decode(object.baseKeySignature, message.baseKeySignature = $util.newBuffer($util.base64.length(object.baseKeySignature)), 0);
-                else if (object.baseKeySignature.length)
+                else if (object.baseKeySignature.length >= 0)
                     message.baseKeySignature = object.baseKeySignature;
             return message;
         };
@@ -939,7 +975,814 @@ $root.textsecure = (function () {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
+        /**
+         * Gets the default type url for KeyExchangeMessage
+         * @function getTypeUrl
+         * @memberof textsecure.KeyExchangeMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        KeyExchangeMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.KeyExchangeMessage";
+        };
+
         return KeyExchangeMessage;
+    })();
+
+    textsecure.DeviceConsistencyCodeMessage = (function() {
+
+        /**
+         * Properties of a DeviceConsistencyCodeMessage.
+         * @memberof textsecure
+         * @interface IDeviceConsistencyCodeMessage
+         * @property {number|null} [generation] DeviceConsistencyCodeMessage generation
+         * @property {Uint8Array|null} [signature] DeviceConsistencyCodeMessage signature
+         */
+
+        /**
+         * Constructs a new DeviceConsistencyCodeMessage.
+         * @memberof textsecure
+         * @classdesc Represents a DeviceConsistencyCodeMessage.
+         * @implements IDeviceConsistencyCodeMessage
+         * @constructor
+         * @param {textsecure.IDeviceConsistencyCodeMessage=} [properties] Properties to set
+         */
+        function DeviceConsistencyCodeMessage(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * DeviceConsistencyCodeMessage generation.
+         * @member {number} generation
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @instance
+         */
+        DeviceConsistencyCodeMessage.prototype.generation = 0;
+
+        /**
+         * DeviceConsistencyCodeMessage signature.
+         * @member {Uint8Array} signature
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @instance
+         */
+        DeviceConsistencyCodeMessage.prototype.signature = $util.newBuffer([]);
+
+        /**
+         * Creates a new DeviceConsistencyCodeMessage instance using the specified properties.
+         * @function create
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {textsecure.IDeviceConsistencyCodeMessage=} [properties] Properties to set
+         * @returns {textsecure.DeviceConsistencyCodeMessage} DeviceConsistencyCodeMessage instance
+         */
+        DeviceConsistencyCodeMessage.create = function create(properties) {
+            return new DeviceConsistencyCodeMessage(properties);
+        };
+
+        /**
+         * Encodes the specified DeviceConsistencyCodeMessage message. Does not implicitly {@link textsecure.DeviceConsistencyCodeMessage.verify|verify} messages.
+         * @function encode
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {textsecure.IDeviceConsistencyCodeMessage} message DeviceConsistencyCodeMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DeviceConsistencyCodeMessage.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.generation);
+            if (message.signature != null && Object.hasOwnProperty.call(message, "signature"))
+                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.signature);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified DeviceConsistencyCodeMessage message, length delimited. Does not implicitly {@link textsecure.DeviceConsistencyCodeMessage.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {textsecure.IDeviceConsistencyCodeMessage} message DeviceConsistencyCodeMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        DeviceConsistencyCodeMessage.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a DeviceConsistencyCodeMessage message from the specified reader or buffer.
+         * @function decode
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {textsecure.DeviceConsistencyCodeMessage} DeviceConsistencyCodeMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DeviceConsistencyCodeMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.DeviceConsistencyCodeMessage();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        message.generation = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.signature = reader.bytes();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a DeviceConsistencyCodeMessage message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {textsecure.DeviceConsistencyCodeMessage} DeviceConsistencyCodeMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        DeviceConsistencyCodeMessage.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a DeviceConsistencyCodeMessage message.
+         * @function verify
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        DeviceConsistencyCodeMessage.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.generation != null && message.hasOwnProperty("generation"))
+                if (!$util.isInteger(message.generation))
+                    return "generation: integer expected";
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                if (!(message.signature && typeof message.signature.length === "number" || $util.isString(message.signature)))
+                    return "signature: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a DeviceConsistencyCodeMessage message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {textsecure.DeviceConsistencyCodeMessage} DeviceConsistencyCodeMessage
+         */
+        DeviceConsistencyCodeMessage.fromObject = function fromObject(object) {
+            if (object instanceof $root.textsecure.DeviceConsistencyCodeMessage)
+                return object;
+            var message = new $root.textsecure.DeviceConsistencyCodeMessage();
+            if (object.generation != null)
+                message.generation = object.generation >>> 0;
+            if (object.signature != null)
+                if (typeof object.signature === "string")
+                    $util.base64.decode(object.signature, message.signature = $util.newBuffer($util.base64.length(object.signature)), 0);
+                else if (object.signature.length >= 0)
+                    message.signature = object.signature;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a DeviceConsistencyCodeMessage message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {textsecure.DeviceConsistencyCodeMessage} message DeviceConsistencyCodeMessage
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        DeviceConsistencyCodeMessage.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.generation = 0;
+                if (options.bytes === String)
+                    object.signature = "";
+                else {
+                    object.signature = [];
+                    if (options.bytes !== Array)
+                        object.signature = $util.newBuffer(object.signature);
+                }
+            }
+            if (message.generation != null && message.hasOwnProperty("generation"))
+                object.generation = message.generation;
+            if (message.signature != null && message.hasOwnProperty("signature"))
+                object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
+            return object;
+        };
+
+        /**
+         * Converts this DeviceConsistencyCodeMessage to JSON.
+         * @function toJSON
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        DeviceConsistencyCodeMessage.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for DeviceConsistencyCodeMessage
+         * @function getTypeUrl
+         * @memberof textsecure.DeviceConsistencyCodeMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        DeviceConsistencyCodeMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.DeviceConsistencyCodeMessage";
+        };
+
+        return DeviceConsistencyCodeMessage;
+    })();
+
+    textsecure.SenderKeyDistributionMessage = (function() {
+
+        /**
+         * Properties of a SenderKeyDistributionMessage.
+         * @memberof textsecure
+         * @interface ISenderKeyDistributionMessage
+         * @property {number|null} [id] SenderKeyDistributionMessage id
+         * @property {number|null} [iteration] SenderKeyDistributionMessage iteration
+         * @property {Uint8Array|null} [chainKey] SenderKeyDistributionMessage chainKey
+         * @property {Uint8Array|null} [signingKey] SenderKeyDistributionMessage signingKey
+         */
+
+        /**
+         * Constructs a new SenderKeyDistributionMessage.
+         * @memberof textsecure
+         * @classdesc Represents a SenderKeyDistributionMessage.
+         * @implements ISenderKeyDistributionMessage
+         * @constructor
+         * @param {textsecure.ISenderKeyDistributionMessage=} [properties] Properties to set
+         */
+        function SenderKeyDistributionMessage(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * SenderKeyDistributionMessage id.
+         * @member {number} id
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @instance
+         */
+        SenderKeyDistributionMessage.prototype.id = 0;
+
+        /**
+         * SenderKeyDistributionMessage iteration.
+         * @member {number} iteration
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @instance
+         */
+        SenderKeyDistributionMessage.prototype.iteration = 0;
+
+        /**
+         * SenderKeyDistributionMessage chainKey.
+         * @member {Uint8Array} chainKey
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @instance
+         */
+        SenderKeyDistributionMessage.prototype.chainKey = $util.newBuffer([]);
+
+        /**
+         * SenderKeyDistributionMessage signingKey.
+         * @member {Uint8Array} signingKey
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @instance
+         */
+        SenderKeyDistributionMessage.prototype.signingKey = $util.newBuffer([]);
+
+        /**
+         * Creates a new SenderKeyDistributionMessage instance using the specified properties.
+         * @function create
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {textsecure.ISenderKeyDistributionMessage=} [properties] Properties to set
+         * @returns {textsecure.SenderKeyDistributionMessage} SenderKeyDistributionMessage instance
+         */
+        SenderKeyDistributionMessage.create = function create(properties) {
+            return new SenderKeyDistributionMessage(properties);
+        };
+
+        /**
+         * Encodes the specified SenderKeyDistributionMessage message. Does not implicitly {@link textsecure.SenderKeyDistributionMessage.verify|verify} messages.
+         * @function encode
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {textsecure.ISenderKeyDistributionMessage} message SenderKeyDistributionMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SenderKeyDistributionMessage.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.iteration != null && Object.hasOwnProperty.call(message, "iteration"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.iteration);
+            if (message.chainKey != null && Object.hasOwnProperty.call(message, "chainKey"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.chainKey);
+            if (message.signingKey != null && Object.hasOwnProperty.call(message, "signingKey"))
+                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.signingKey);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified SenderKeyDistributionMessage message, length delimited. Does not implicitly {@link textsecure.SenderKeyDistributionMessage.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {textsecure.ISenderKeyDistributionMessage} message SenderKeyDistributionMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SenderKeyDistributionMessage.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a SenderKeyDistributionMessage message from the specified reader or buffer.
+         * @function decode
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {textsecure.SenderKeyDistributionMessage} SenderKeyDistributionMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SenderKeyDistributionMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.SenderKeyDistributionMessage();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.iteration = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.chainKey = reader.bytes();
+                        break;
+                    }
+                case 4: {
+                        message.signingKey = reader.bytes();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a SenderKeyDistributionMessage message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {textsecure.SenderKeyDistributionMessage} SenderKeyDistributionMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SenderKeyDistributionMessage.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a SenderKeyDistributionMessage message.
+         * @function verify
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SenderKeyDistributionMessage.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.iteration != null && message.hasOwnProperty("iteration"))
+                if (!$util.isInteger(message.iteration))
+                    return "iteration: integer expected";
+            if (message.chainKey != null && message.hasOwnProperty("chainKey"))
+                if (!(message.chainKey && typeof message.chainKey.length === "number" || $util.isString(message.chainKey)))
+                    return "chainKey: buffer expected";
+            if (message.signingKey != null && message.hasOwnProperty("signingKey"))
+                if (!(message.signingKey && typeof message.signingKey.length === "number" || $util.isString(message.signingKey)))
+                    return "signingKey: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a SenderKeyDistributionMessage message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {textsecure.SenderKeyDistributionMessage} SenderKeyDistributionMessage
+         */
+        SenderKeyDistributionMessage.fromObject = function fromObject(object) {
+            if (object instanceof $root.textsecure.SenderKeyDistributionMessage)
+                return object;
+            var message = new $root.textsecure.SenderKeyDistributionMessage();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.iteration != null)
+                message.iteration = object.iteration >>> 0;
+            if (object.chainKey != null)
+                if (typeof object.chainKey === "string")
+                    $util.base64.decode(object.chainKey, message.chainKey = $util.newBuffer($util.base64.length(object.chainKey)), 0);
+                else if (object.chainKey.length >= 0)
+                    message.chainKey = object.chainKey;
+            if (object.signingKey != null)
+                if (typeof object.signingKey === "string")
+                    $util.base64.decode(object.signingKey, message.signingKey = $util.newBuffer($util.base64.length(object.signingKey)), 0);
+                else if (object.signingKey.length >= 0)
+                    message.signingKey = object.signingKey;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a SenderKeyDistributionMessage message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {textsecure.SenderKeyDistributionMessage} message SenderKeyDistributionMessage
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SenderKeyDistributionMessage.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.iteration = 0;
+                if (options.bytes === String)
+                    object.chainKey = "";
+                else {
+                    object.chainKey = [];
+                    if (options.bytes !== Array)
+                        object.chainKey = $util.newBuffer(object.chainKey);
+                }
+                if (options.bytes === String)
+                    object.signingKey = "";
+                else {
+                    object.signingKey = [];
+                    if (options.bytes !== Array)
+                        object.signingKey = $util.newBuffer(object.signingKey);
+                }
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.iteration != null && message.hasOwnProperty("iteration"))
+                object.iteration = message.iteration;
+            if (message.chainKey != null && message.hasOwnProperty("chainKey"))
+                object.chainKey = options.bytes === String ? $util.base64.encode(message.chainKey, 0, message.chainKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.chainKey) : message.chainKey;
+            if (message.signingKey != null && message.hasOwnProperty("signingKey"))
+                object.signingKey = options.bytes === String ? $util.base64.encode(message.signingKey, 0, message.signingKey.length) : options.bytes === Array ? Array.prototype.slice.call(message.signingKey) : message.signingKey;
+            return object;
+        };
+
+        /**
+         * Converts this SenderKeyDistributionMessage to JSON.
+         * @function toJSON
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SenderKeyDistributionMessage.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for SenderKeyDistributionMessage
+         * @function getTypeUrl
+         * @memberof textsecure.SenderKeyDistributionMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        SenderKeyDistributionMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.SenderKeyDistributionMessage";
+        };
+
+        return SenderKeyDistributionMessage;
+    })();
+
+    textsecure.SenderKeyMessage = (function() {
+
+        /**
+         * Properties of a SenderKeyMessage.
+         * @memberof textsecure
+         * @interface ISenderKeyMessage
+         * @property {number|null} [id] SenderKeyMessage id
+         * @property {number|null} [iteration] SenderKeyMessage iteration
+         * @property {Uint8Array|null} [ciphertext] SenderKeyMessage ciphertext
+         */
+
+        /**
+         * Constructs a new SenderKeyMessage.
+         * @memberof textsecure
+         * @classdesc Represents a SenderKeyMessage.
+         * @implements ISenderKeyMessage
+         * @constructor
+         * @param {textsecure.ISenderKeyMessage=} [properties] Properties to set
+         */
+        function SenderKeyMessage(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * SenderKeyMessage id.
+         * @member {number} id
+         * @memberof textsecure.SenderKeyMessage
+         * @instance
+         */
+        SenderKeyMessage.prototype.id = 0;
+
+        /**
+         * SenderKeyMessage iteration.
+         * @member {number} iteration
+         * @memberof textsecure.SenderKeyMessage
+         * @instance
+         */
+        SenderKeyMessage.prototype.iteration = 0;
+
+        /**
+         * SenderKeyMessage ciphertext.
+         * @member {Uint8Array} ciphertext
+         * @memberof textsecure.SenderKeyMessage
+         * @instance
+         */
+        SenderKeyMessage.prototype.ciphertext = $util.newBuffer([]);
+
+        /**
+         * Creates a new SenderKeyMessage instance using the specified properties.
+         * @function create
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {textsecure.ISenderKeyMessage=} [properties] Properties to set
+         * @returns {textsecure.SenderKeyMessage} SenderKeyMessage instance
+         */
+        SenderKeyMessage.create = function create(properties) {
+            return new SenderKeyMessage(properties);
+        };
+
+        /**
+         * Encodes the specified SenderKeyMessage message. Does not implicitly {@link textsecure.SenderKeyMessage.verify|verify} messages.
+         * @function encode
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {textsecure.ISenderKeyMessage} message SenderKeyMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SenderKeyMessage.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 1, wireType 0 =*/8).uint32(message.id);
+            if (message.iteration != null && Object.hasOwnProperty.call(message, "iteration"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.iteration);
+            if (message.ciphertext != null && Object.hasOwnProperty.call(message, "ciphertext"))
+                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.ciphertext);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified SenderKeyMessage message, length delimited. Does not implicitly {@link textsecure.SenderKeyMessage.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {textsecure.ISenderKeyMessage} message SenderKeyMessage message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        SenderKeyMessage.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a SenderKeyMessage message from the specified reader or buffer.
+         * @function decode
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {textsecure.SenderKeyMessage} SenderKeyMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SenderKeyMessage.decode = function decode(reader, length, error) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.textsecure.SenderKeyMessage();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                if (tag === error)
+                    break;
+                switch (tag >>> 3) {
+                case 1: {
+                        message.id = reader.uint32();
+                        break;
+                    }
+                case 2: {
+                        message.iteration = reader.uint32();
+                        break;
+                    }
+                case 3: {
+                        message.ciphertext = reader.bytes();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a SenderKeyMessage message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {textsecure.SenderKeyMessage} SenderKeyMessage
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        SenderKeyMessage.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a SenderKeyMessage message.
+         * @function verify
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        SenderKeyMessage.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isInteger(message.id))
+                    return "id: integer expected";
+            if (message.iteration != null && message.hasOwnProperty("iteration"))
+                if (!$util.isInteger(message.iteration))
+                    return "iteration: integer expected";
+            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                if (!(message.ciphertext && typeof message.ciphertext.length === "number" || $util.isString(message.ciphertext)))
+                    return "ciphertext: buffer expected";
+            return null;
+        };
+
+        /**
+         * Creates a SenderKeyMessage message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {textsecure.SenderKeyMessage} SenderKeyMessage
+         */
+        SenderKeyMessage.fromObject = function fromObject(object) {
+            if (object instanceof $root.textsecure.SenderKeyMessage)
+                return object;
+            var message = new $root.textsecure.SenderKeyMessage();
+            if (object.id != null)
+                message.id = object.id >>> 0;
+            if (object.iteration != null)
+                message.iteration = object.iteration >>> 0;
+            if (object.ciphertext != null)
+                if (typeof object.ciphertext === "string")
+                    $util.base64.decode(object.ciphertext, message.ciphertext = $util.newBuffer($util.base64.length(object.ciphertext)), 0);
+                else if (object.ciphertext.length >= 0)
+                    message.ciphertext = object.ciphertext;
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a SenderKeyMessage message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {textsecure.SenderKeyMessage} message SenderKeyMessage
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        SenderKeyMessage.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = 0;
+                object.iteration = 0;
+                if (options.bytes === String)
+                    object.ciphertext = "";
+                else {
+                    object.ciphertext = [];
+                    if (options.bytes !== Array)
+                        object.ciphertext = $util.newBuffer(object.ciphertext);
+                }
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.iteration != null && message.hasOwnProperty("iteration"))
+                object.iteration = message.iteration;
+            if (message.ciphertext != null && message.hasOwnProperty("ciphertext"))
+                object.ciphertext = options.bytes === String ? $util.base64.encode(message.ciphertext, 0, message.ciphertext.length) : options.bytes === Array ? Array.prototype.slice.call(message.ciphertext) : message.ciphertext;
+            return object;
+        };
+
+        /**
+         * Converts this SenderKeyMessage to JSON.
+         * @function toJSON
+         * @memberof textsecure.SenderKeyMessage
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        SenderKeyMessage.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Gets the default type url for SenderKeyMessage
+         * @function getTypeUrl
+         * @memberof textsecure.SenderKeyMessage
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        SenderKeyMessage.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/textsecure.SenderKeyMessage";
+        };
+
+        return SenderKeyMessage;
     })();
 
     return textsecure;

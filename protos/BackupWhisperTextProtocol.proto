@@ -26,21 +26,3 @@ message KeyExchangeMessage {
   optional bytes  identityKey      = 4;
   optional bytes  baseKeySignature = 5;
 }
-
-message DeviceConsistencyCodeMessage {
-    optional uint32 generation = 1;
-    optional bytes signature = 2;
-}
-
-message SenderKeyDistributionMessage {
-    optional uint32 id = 1;
-    optional uint32 iteration = 2;
-    optional bytes chainKey = 3;
-    optional bytes signingKey = 4;
-}
-
-message SenderKeyMessage {
-    optional uint32 id = 1;
-    optional uint32 iteration = 2;
-    optional bytes ciphertext = 3;
-}

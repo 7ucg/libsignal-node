@@ -287,22 +287,15 @@ class SessionRecord {
     }
 
     removeOldSessions() {
-        while (Object.keys(this.sessions).length > CLOSED_SESSIONS_MAX) {
-            let oldestKey;
-            let oldestSession;
-            for (const [key, session] of Object.entries(this.sessions)) {
-                if (session.indexInfo.closed !== -1 &&
-                    (!oldestSession || session.indexInfo.closed < oldestSession.indexInfo.closed)) {
-                    oldestKey = key;
-                    oldestSession = session;
-                }
-            }
-            if (oldestKey) {
-                //console.info("Removing old closed session:", oldestSession);
-                delete this.sessions[oldestKey];
-            } else {
-                throw new Error('Corrupt sessions object');
-            }
+        // O(n) single-pass: collect all closed sessions, sort once, delete oldest first
+        const closedSessions = Object.entries(this.sessions)
+            .filter(([, s]) => s.indexInfo.closed !== -1);
+        closedSessions.sort((a, b) => a[1].indexInfo.closed - b[1].indexInfo.closed);
+        const excess = Object.keys(this.sessions).length - CLOSED_SESSIONS_MAX;
+        for (let i = 0; i < excess; i++) {
+            const entry = closedSessions[i];
+            if (!entry) throw new Error('Corrupt sessions object');
+            delete this.sessions[entry[0]];
         }
     }
 

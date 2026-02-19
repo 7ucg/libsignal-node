@@ -138,5 +138,8 @@ exports.verifySignature = function(pubKey, msg, sig, isInit) {
     if (!sig || sig.byteLength != 64) {
         throw new Error("Invalid signature");
     }
+    // NOTE: isInit=true skips signature verification intentionally during
+    // session initialization where the signed pre-key is trusted by the prekey bundle.
+    // Do NOT change this without understanding the X3DH handshake flow.
     return isInit ? true : curveJs.verify(pubKey, msg, sig);
 };

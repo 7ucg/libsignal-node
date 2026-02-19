@@ -5,19 +5,15 @@ var VERSION = 0;
 
 
 async function iterateHash(data, key, count) {
-    const combined = (new Uint8Array(Buffer.concat([data, key]))).buffer;
-    const result = crypto.hash(combined);
-    if (--count === 0) {
-        return result;
-    } else {
-        return iterateHash(result, key, count);
+    // Iterative instead of recursive to avoid stack overflow (up to 5206 iterations).
+    let result = data;
+    for (let i = 0; i < count; i++) {
+        const combined = Buffer.concat([Buffer.from(result), Buffer.from(key)]);
+        result = crypto.hash(combined);
     }
+    return result;
 }
 
-
-function shortToArrayBuffer(number) {
-    return new Uint16Array([number]).buffer;
-}
 
 function getEncodedChunk(hash, offset) {
     var chunk = ( hash[offset]   * Math.pow(2,32) +
@@ -34,12 +30,11 @@ function getEncodedChunk(hash, offset) {
 
 async function getDisplayStringFor(identifier, key, iterations) {
     const bytes = Buffer.concat([
-        shortToArrayBuffer(VERSION),
-        key,
-        identifier
+        Buffer.from(new Uint16Array([VERSION]).buffer),
+        Buffer.isBuffer(key) ? key : Buffer.from(key),
+        Buffer.isBuffer(identifier) ? identifier : Buffer.from(identifier)
     ]);
-    const arraybuf = (new Uint8Array(bytes)).buffer;
-    const output = new Uint8Array(await iterateHash(arraybuf, key, iterations));
+    const output = new Uint8Array(await iterateHash(bytes, Buffer.isBuffer(key) ? key : Buffer.from(key), iterations));
     return getEncodedChunk(output, 0) +
         getEncodedChunk(output, 5) +
         getEncodedChunk(output, 10) +

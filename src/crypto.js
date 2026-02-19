@@ -83,7 +83,8 @@ function verifyMAC(data, key, mac, length) {
     if (mac.length !== length || calculatedMac.length !== length) {
         throw new Error("Bad MAC length");
     }
-    if (!mac.equals(calculatedMac)) {
+    // Timing-safe comparison to prevent timing attacks
+    if (!nodeCrypto.timingSafeEqual(mac, calculatedMac)) {
         throw new Error("Bad MAC");
     }
 }

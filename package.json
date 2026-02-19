@@ -1,6 +1,6 @@
 {
   "name": "libsignal-baron",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "Open Whisper Systems' libsignal for Node.js",
   "repository": "7ucg/libsignal-node",
   "main": "index.js",
@@ -15,12 +15,13 @@
   },
   "dependencies": {
     "curve25519-js": "^0.0.4",
-    "protobufjs": "7.5.0"
+    "protobufjs": "7.5.4"
   },
   "files": [
     "src/*"
   ],
   "devDependencies": {
-    "eslint": "6.0.1"
+    "eslint": "^10.0.0",
+    "globals": "^16.0.0"
   }
 }

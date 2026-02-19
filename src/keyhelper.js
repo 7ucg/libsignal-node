@@ -10,8 +10,9 @@ function isNonNegativeInteger(n) {
 exports.generateIdentityKeyPair = curve.generateKeyPair;
 
 exports.generateRegistrationId = function() {
-    var registrationId = Uint16Array.from(nodeCrypto.randomBytes(2))[0];
-    return registrationId & 0x3fff;
+    // readUInt16BE correctly combines 2 random bytes into one 16-bit value (0–65535).
+    // Uint16Array.from(Buffer) would only yield the first byte (0–255) — wrong.
+    return nodeCrypto.randomBytes(2).readUInt16BE(0) & 0x3fff;
 };
 
 exports.generateSignedPreKey = function(identityKeyPair, signedKeyId) {

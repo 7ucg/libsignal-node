@@ -4,7 +4,7 @@ exports.SignalError = class SignalError extends Error {};
 
 exports.UntrustedIdentityKeyError = class UntrustedIdentityKeyError extends exports.SignalError {
     constructor(addr, identityKey) {
-        super();
+        super(`Untrusted identity key for address: ${addr}`);
         this.name = 'UntrustedIdentityKeyError';
         this.addr = addr;
         this.identityKey = identityKey;

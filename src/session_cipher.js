@@ -70,7 +70,7 @@ class SessionCipher {
             
             // FALLBACK: Wenn keine Session existiert, sende trotzdem
             if (!record) {
-                console.warn(`⚠️ No session record found for ${this.addr.toString()}. Sending without encryption (Fallback).`);
+                // console.warn(`⚠️ No session record found for ${this.addr.toString()}. Sending without encryption (Fallback).`);
                 // Rückgabe eines simplen, unverschlüsselten Messages
                 return {
                     type: 1,  // normal message
@@ -86,7 +86,7 @@ class SessionCipher {
             
             // FALLBACK: Wenn keine offene Session, aber Record existiert
             if (!session) {
-                console.warn(`⚠️ No open session found for ${this.addr.toString()}. Sending without encryption (Fallback).`);
+                // console.warn(`⚠️ No open session found for ${this.addr.toString()}. Sending without encryption (Fallback).`);
                 return {
                     type: 1,  // normal message
                     body: Buffer.concat([
@@ -179,7 +179,7 @@ class SessionCipher {
         }
         // Instead of just crashing, log more details and be graceful
         const errorDetails = errs.map(e => e.message || e.toString()).join(', ');
-        console.warn(`⚠️ Failed to decrypt message with any known session (${this.addr}): ${errorDetails}`);
+        // console.warn(`⚠️ Failed to decrypt message with any known session (${this.addr}): ${errorDetails}`);
         throw new errors.SessionError("No matching sessions found for message");
     }
 
